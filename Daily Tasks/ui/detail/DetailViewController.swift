@@ -57,7 +57,10 @@ class DetailViewController: UIViewController, UITextFieldDelegate {
         if isDone {
             btnStatus.setBackgroundImage(UIImage(named: "ic_check"), for: .normal, barMetrics: .default)
         }
-        let btnDate = UIBarButtonItem(image: UIImage(named: "ic_calendar"), style: .done, target: self, action: #selector(btnDateClicked(_:)))
+        let btnDate1 = UIButton()
+        btnDate1.setImage(UIImage(named: "ic_calendar"), for: .normal)
+        btnDate1.addTarget(self, action: #selector(btnDateClicked(_:)), for: .touchUpInside)
+        let btnDate = UIBarButtonItem(customView: btnDate1)
         let btnP1 = UIButton()
         btnP1.setImage(UIImage(named: "ic_p_1"), for: .normal)
         btnP1.addTarget(self, action: #selector(p1Clicked(_:)), for: .touchUpInside)

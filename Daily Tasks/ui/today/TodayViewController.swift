@@ -94,6 +94,34 @@ class TodayViewController: UIViewController {
         taskTableView.reloadData()
     }
     
+    private func handleCloneTask(index: Int) {
+        guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let cloneTask = tasks[index]
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        let entity =
+            NSEntityDescription.entity(forEntityName: "TaskEntity",
+                                       in: managedContext)!
+        let taskEntity = NSManagedObject(entity: entity,
+                                         insertInto: managedContext)
+        taskEntity.setValue(cloneTask.title, forKey: "title")
+        taskEntity.setValue(cloneTask.taskDesc, forKey: "taskDesc")
+        taskEntity.setValue(cloneTask.priority, forKey: "priority")
+        taskEntity.setValue(Int64(Date().timeIntervalSince1970), forKey: "id")
+        taskEntity.setValue(cloneTask.createDate, forKey: "createDate")
+        taskEntity.setValue(cloneTask.status, forKey: "status")
+        
+        do {
+            try managedContext.save()
+            fetchTasks()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
+    }
+    
     @objc func addBtnClicked(_ sender: Any) {
         let detailVC = DetailViewController()
         navigationController?.pushViewController(detailVC, animated: true)
@@ -103,13 +131,19 @@ class TodayViewController: UIViewController {
 extension TodayViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let actionClone = UIContextualAction(style: .normal,
+                                             title: "Clone") { [weak self] (action, view, completionHandler) in
+            self?.handleCloneTask(index: indexPath.row)
+            completionHandler(true)
+        }
         let action = UIContextualAction(style: .normal,
                                         title: "Delete") { [weak self] (action, view, completionHandler) in
             self?.handleDeleteTask(index: indexPath.row)
             completionHandler(true)
         }
         action.backgroundColor = .systemRed
-        return UISwipeActionsConfiguration(actions: [action])
+        actionClone.backgroundColor = .systemBlue
+        return UISwipeActionsConfiguration(actions: [action, actionClone])
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

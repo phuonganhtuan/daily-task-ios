@@ -41,12 +41,23 @@ class TaskListViewController: UIViewController {
         taskListTableView.reloadData()
     }
     
+    private func convertStringToDate(dateStr:String, format:String = "dd/MM/yyyy") -> Date{
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = format
+        return dateFormat.date(from: dateStr)!
+    }
+    
     private func setupData() {
         tasksByDays = []
         let daysFull = tasks.map({task in
             task.createDate
         })
         days = daysFull.uniqued()
+        days.sort(by: {day1, day2 in
+            let date1 = convertStringToDate(dateStr: day1 ?? "")
+            let date2 = convertStringToDate(dateStr: day2 ?? "")
+            return date1.timeIntervalSince1970 > date2.timeIntervalSince1970
+        })
         for i in 0..<days.count {
             let tasksByDay = tasks.filter({task in
                 task.createDate == days[i]
@@ -78,9 +89,9 @@ class TaskListViewController: UIViewController {
         let btnAdd = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(addBtnClicked(_:)))
         items.append(btnAdd)
         toolbarItems = items
-//        searchController.delegate = self
-//        searchController.searchBar.delegate = self
-//        navigationItem.searchController = searchController
+        //        searchController.delegate = self
+        //        searchController.searchBar.delegate = self
+        //        navigationItem.searchController = searchController
     }
     
     private func handleDeleteTask(section: Int, index: Int) {
@@ -92,6 +103,34 @@ class TaskListViewController: UIViewController {
             appDelegate.persistentContainer.viewContext
         managedContext.delete(tasksByDays[section][index])
         fetchTasks()
+    }
+    
+    private func handleCloneTask(section: Int, index: Int) {
+        guard let appDelegate =
+                UIApplication.shared.delegate as? AppDelegate else {
+            return
+        }
+        let cloneTask = tasksByDays[section][index]
+        let managedContext =
+            appDelegate.persistentContainer.viewContext
+        let entity =
+            NSEntityDescription.entity(forEntityName: "TaskEntity",
+                                       in: managedContext)!
+        let taskEntity = NSManagedObject(entity: entity,
+                                         insertInto: managedContext)
+        taskEntity.setValue(cloneTask.title, forKey: "title")
+        taskEntity.setValue(cloneTask.taskDesc, forKey: "taskDesc")
+        taskEntity.setValue(cloneTask.priority, forKey: "priority")
+        taskEntity.setValue(Int64(Date().timeIntervalSince1970), forKey: "id")
+        taskEntity.setValue(cloneTask.createDate, forKey: "createDate")
+        taskEntity.setValue(cloneTask.status, forKey: "status")
+        
+        do {
+            try managedContext.save()
+            fetchTasks()
+        } catch let error as NSError {
+            print("Could not save. \(error), \(error.userInfo)")
+        }
     }
     
     private func handleUpdateTaskStatus(section: Int, index: Int) {
@@ -126,13 +165,19 @@ class TaskListViewController: UIViewController {
 
 extension TaskListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let actionClone = UIContextualAction(style: .normal,
+                                             title: "Clone") { [weak self] (action, view, completionHandler) in
+            self?.handleCloneTask(section: indexPath.section, index: indexPath.row)
+            completionHandler(true)
+        }
         let action = UIContextualAction(style: .normal,
                                         title: "Delete") { [weak self] (action, view, completionHandler) in
             self?.handleDeleteTask(section: indexPath.section, index: indexPath.row)
             completionHandler(true)
         }
         action.backgroundColor = .systemRed
-        return UISwipeActionsConfiguration(actions: [action])
+        actionClone.backgroundColor = .systemBlue
+        return UISwipeActionsConfiguration(actions: [action, actionClone])
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
