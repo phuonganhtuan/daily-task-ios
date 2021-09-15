@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TaskListViewController" customModule="Daily_Tasks" customModuleProvider="target">
             <connections>
+                <outlet property="labelEmpty" destination="HSQ-d2-IxW" id="V7z-sJ-g2J"/>
                 <outlet property="taskListTableView" destination="RMI-cN-DR0" id="raK-4h-DcD"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,21 +23,37 @@
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="insetGrouped" separatorStyle="singleLineEtched" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="RMI-cN-DR0">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No data." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HSQ-d2-IxW">
+                    <rect key="frame" x="0.0" y="261" width="414" height="104"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="104" id="fZK-xC-u4i"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                    <color key="textColor" systemColor="systemGray2Color"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="RMI-cN-DR0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5xh-oC-RCB"/>
+                <constraint firstItem="HSQ-d2-IxW" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="7GZ-eM-tu7"/>
                 <constraint firstItem="RMI-cN-DR0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Bln-2s-RRG"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="HSQ-d2-IxW" secondAttribute="bottom" constant="497" id="Eq2-RX-1XF"/>
+                <constraint firstItem="HSQ-d2-IxW" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Nb6-p9-eHW"/>
+                <constraint firstItem="HSQ-d2-IxW" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="217" id="gZ0-ys-7ia"/>
                 <constraint firstItem="RMI-cN-DR0" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="smA-Sc-IMb"/>
                 <constraint firstAttribute="bottom" secondItem="RMI-cN-DR0" secondAttribute="bottom" id="w7u-SV-r3k"/>
             </constraints>
-            <point key="canvasLocation" x="112" y="87"/>
+            <point key="canvasLocation" x="111.59420289855073" y="86.383928571428569"/>
         </view>
     </objects>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray2Color">
+            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

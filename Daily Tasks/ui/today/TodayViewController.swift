@@ -11,6 +11,7 @@ import CoreData
 class TodayViewController: UIViewController {
     
     @IBOutlet weak var taskTableView: UITableView!
+    @IBOutlet weak var labelEmpty: UILabel!
     
     private var tasks = [TaskEntity]()
     private var dbHelper = DBHelper()
@@ -32,6 +33,15 @@ class TodayViewController: UIViewController {
         tasks.reverse()
         setupViews()
         taskTableView.reloadData()
+        showOrHideEmptyView()
+    }
+    
+    private func showOrHideEmptyView() {
+        if (tasks.isEmpty) {
+            labelEmpty.show()
+        } else {
+            labelEmpty.hide()
+        }
     }
     
     private func setupViews() {
@@ -57,14 +67,20 @@ class TodayViewController: UIViewController {
     }
     
     private func handleDeleteTask(index: Int) {
-        guard let appDelegate =
-                UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        managedContext.delete(tasks[index])
-        fetchTasks()
+        let deleteAlert = UIAlertController(title: "Delete this task?", message: "This action cannot be undone", preferredStyle: UIAlertController.Style.alert)
+        deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
+            guard let appDelegate =
+                    UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            let managedContext =
+                appDelegate.persistentContainer.viewContext
+            managedContext.delete(self.tasks[index])
+            self.fetchTasks()
+        }))
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+        }))
+        present(deleteAlert, animated: true, completion: nil)
     }
     
     private func handleUpdateTaskStatus(index: Int) {
@@ -92,6 +108,7 @@ class TodayViewController: UIViewController {
             return
         }
         taskTableView.reloadData()
+        showOrHideEmptyView()
     }
     
     private func handleCloneTask(index: Int) {

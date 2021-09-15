@@ -11,8 +11,8 @@ class MainViewController: UIViewController {
     
     @IBOutlet weak var menuTableView: UITableView!
     
-    var cellTitles = ["Today tasks", "All tasks"]
-    var imageNames = ["clock", "list.bullet"]
+    var cellTitles = ["Today tasks", "All tasks", "Statistics", "Import & Export", "About Daily Tasks"]
+    var imageNames = ["clock", "list.bullet", "chart.bar.xaxis", "gobackward", "person"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +43,21 @@ class MainViewController: UIViewController {
         let listVC = TaskListViewController()
         navigationController?.pushViewController(listVC, animated: true)
     }
+    
+    private func openBackupPage() {
+        let backupVC = BackupViewController()
+        navigationController?.pushViewController(backupVC, animated: true)
+    }
+    
+    private func openStatisticsPage() {
+        let statisticsVC = StatisticsViewController()
+        navigationController?.pushViewController(statisticsVC, animated: true)
+    }
+    
+    private func openAboutPage() {
+        let aboutVC = AboutViewController()
+        navigationController?.pushViewController(aboutVC, animated: true)
+    }
 }
 
 extension MainViewController: UITableViewDelegate {
@@ -50,15 +65,23 @@ extension MainViewController: UITableViewDelegate {
         switch indexPath.row {
         case 0:
             openTodayTasks()
-        default:
+        case 1:
             openListTasks()
+        case 2:
+            openStatisticsPage()
+        case 3:
+            openBackupPage()
+        case 4:
+            openAboutPage()
+        default:
+            return
         }
     }
 }
 
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return cellTitles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

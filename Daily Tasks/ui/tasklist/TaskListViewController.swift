@@ -11,6 +11,7 @@ import CoreData
 class TaskListViewController: UIViewController {
     
     @IBOutlet weak var taskListTableView: UITableView!
+    @IBOutlet weak var labelEmpty: UILabel!
     
     private var searchController = UISearchController()
     
@@ -19,6 +20,7 @@ class TaskListViewController: UIViewController {
     
     private var days = [String?]()
     private var tasksByDays = [[TaskEntity]]()
+    private var currentFilter = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +38,18 @@ class TaskListViewController: UIViewController {
     private func fetchTasks() {
         tasks = dbHelper.fetch(name: "TaskEntity", predicate: nil) as? [TaskEntity] ?? []
         tasks.reverse()
-        setupData()
+        setupData(keyword: currentFilter)
         setupViews()
         taskListTableView.reloadData()
+        showOrHideEmptyView()
+    }
+    
+    private func showOrHideEmptyView() {
+        if (tasksByDays.isEmpty) {
+            labelEmpty.show()
+        } else {
+            labelEmpty.hide()
+        }
     }
     
     private func convertStringToDate(dateStr:String, format:String = "dd/MM/yyyy") -> Date{
@@ -47,7 +58,7 @@ class TaskListViewController: UIViewController {
         return dateFormat.date(from: dateStr)!
     }
     
-    private func setupData() {
+    private func setupData(keyword: String) {
         tasksByDays = []
         let daysFull = tasks.map({task in
             task.createDate
@@ -58,25 +69,51 @@ class TaskListViewController: UIViewController {
             let date2 = convertStringToDate(dateStr: day2 ?? "")
             return date1.timeIntervalSince1970 > date2.timeIntervalSince1970
         })
+        var daysRemove = [Int]()
         for i in 0..<days.count {
-            let tasksByDay = tasks.filter({task in
+            var tasksByDay = tasks.filter({task in
                 task.createDate == days[i]
             })
-            tasksByDays.append(tasksByDay)
+            if (!keyword.isEmpty) {
+                tasksByDay = tasks.filter({task in
+                    task.createDate == days[i] && (task.title?.lowercased().contains(keyword.lowercased()) ?? false || task.taskDesc?.lowercased().contains(keyword.lowercased()) ?? false)
+                })
+            }
             if days[i] == getDateFromMilliseconds(millis: Int64(Date().timeIntervalSince1970)) {
                 days[i] = "Today"
             }
+            if (tasksByDay.isEmpty) {
+                daysRemove.append(i)
+            } else {
+                tasksByDays.append(tasksByDay)
+            }
+        }
+        for j in 0..<daysRemove.count {
+            days.remove(at: daysRemove.reversed()[j])
         }
     }
     
     private func setupViews() {
-        title = "All tasks"
+        setupFilterView()
         taskListTableView.dataSource = self
         taskListTableView.delegate = self
         taskListTableView.register(UINib(nibName: "TaskTableViewCell", bundle: nil), forCellReuseIdentifier: "taskCell")
+        setupToolbar()
+        searchController.delegate = self
+        searchController.searchBar.delegate = self
+        navigationItem.searchController = searchController
+    }
+    
+    private func setupToolbar() {
         var items = [UIBarButtonItem]()
         let label = UILabel()
-        label.text = "\(tasks.count) task(s)"
+        var filterTasks = tasks
+        if (!currentFilter.isEmpty) {
+            filterTasks = tasks.filter({task in
+                task.title?.lowercased().contains(currentFilter.lowercased()) ?? false || task.taskDesc?.lowercased().contains(currentFilter.lowercased()) ?? false
+            })
+        }
+        label.text = "\(filterTasks.count) task(s)"
         label.textAlignment = .center
         label.font = label.font.withSize(12)
         items.append(
@@ -89,20 +126,23 @@ class TaskListViewController: UIViewController {
         let btnAdd = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(addBtnClicked(_:)))
         items.append(btnAdd)
         toolbarItems = items
-        //        searchController.delegate = self
-        //        searchController.searchBar.delegate = self
-        //        navigationItem.searchController = searchController
     }
     
     private func handleDeleteTask(section: Int, index: Int) {
-        guard let appDelegate =
-                UIApplication.shared.delegate as? AppDelegate else {
-            return
-        }
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-        managedContext.delete(tasksByDays[section][index])
-        fetchTasks()
+        let deleteAlert = UIAlertController(title: "Delete this task?", message: "This action cannot be undone", preferredStyle: UIAlertController.Style.alert)
+        deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
+            guard let appDelegate =
+                    UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            let managedContext =
+                appDelegate.persistentContainer.viewContext
+            managedContext.delete(self.tasksByDays[section][index])
+            self.fetchTasks()
+        }))
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+        }))
+        present(deleteAlert, animated: true, completion: nil)
     }
     
     private func handleCloneTask(section: Int, index: Int) {
@@ -155,6 +195,32 @@ class TaskListViewController: UIViewController {
             return
         }
         taskListTableView.reloadData()
+        showOrHideEmptyView()
+    }
+    
+    private func filterTasks() {
+        setupData(keyword: currentFilter)
+        taskListTableView.reloadData()
+        showOrHideEmptyView()
+        setupToolbar()
+    }
+    
+    private func setupFilterView() {
+        if (currentFilter.isEmpty) {
+            title = "All tasks"
+            self.navigationItem.rightBarButtonItem = nil
+        } else {
+            title = "Filtering: \(currentFilter)"
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "Reset filter", style: .done, target: self, action: #selector(self.clearFilter(_:)))
+
+        }
+    }
+    
+    @objc func clearFilter(_ sender: Any) {
+        currentFilter = ""
+        searchController.searchBar.text = ""
+        filterTasks()
+        setupFilterView()
     }
     
     @objc func addBtnClicked(_ sender: Any) {
@@ -219,5 +285,9 @@ extension TaskListViewController: UITableViewDataSource {
 extension TaskListViewController: UISearchControllerDelegate, UISearchBarDelegate {
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         print(searchBar.text)
+        currentFilter = searchBar.text ?? ""
+        searchController.searchBar.text = currentFilter
+        filterTasks()
+        setupFilterView()
     }
 }

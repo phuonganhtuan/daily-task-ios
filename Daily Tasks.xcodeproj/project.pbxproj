@@ -10,6 +10,9 @@
 		193706669B97FF2AC63D7A6C /* Pods_Daily_Tasks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38416C52A3FA7BB55DA25AC9 /* Pods_Daily_Tasks.framework */; };
 		E90C00EC268C4B6500183DC2 /* DatePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90C00EA268C4B6500183DC2 /* DatePickerViewController.swift */; };
 		E90C00ED268C4B6500183DC2 /* DatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E90C00EB268C4B6500183DC2 /* DatePickerViewController.xib */; };
+		E9701B882697DFAA00E24CDD /* BackupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9701B862697DFAA00E24CDD /* BackupViewController.swift */; };
+		E9701B892697DFAA00E24CDD /* BackupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9701B872697DFAA00E24CDD /* BackupViewController.xib */; };
+		E9701B8B2697E3DC00E24CDD /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9701B8A2697E3DC00E24CDD /* LoadingView.swift */; };
 		E97A8253268412EC00114B78 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97A8252268412EC00114B78 /* DBHelper.swift */; };
 		E97A82552684361800114B78 /* GlobalUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97A82542684361800114B78 /* GlobalUtils.swift */; };
 		E97A825A26843A8400114B78 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97A825826843A8400114B78 /* MainViewController.swift */; };
@@ -34,6 +37,10 @@
 		E999C85A2683209C0008ACEE /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E999C8582683209C0008ACEE /* TaskTableViewCell.swift */; };
 		E999C85B2683209C0008ACEE /* TaskTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E999C8592683209C0008ACEE /* TaskTableViewCell.xib */; };
 		E999C85E268322C40008ACEE /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = E999C85D268322C40008ACEE /* View+.swift */; };
+		E9D16CEF26F19C4800EB4DB4 /* StatisticsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D16CED26F19C4800EB4DB4 /* StatisticsViewController.swift */; };
+		E9D16CF026F19C4800EB4DB4 /* StatisticsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D16CEE26F19C4800EB4DB4 /* StatisticsViewController.xib */; };
+		E9D16CF726F19D2D00EB4DB4 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D16CF526F19D2D00EB4DB4 /* AboutViewController.swift */; };
+		E9D16CF826F19D2D00EB4DB4 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9D16CF626F19D2D00EB4DB4 /* AboutViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +49,9 @@
 		7133A0DBD6C8DCFDB7C279DC /* Pods-Daily Tasks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Daily Tasks.release.xcconfig"; path = "Target Support Files/Pods-Daily Tasks/Pods-Daily Tasks.release.xcconfig"; sourceTree = "<group>"; };
 		E90C00EA268C4B6500183DC2 /* DatePickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewController.swift; sourceTree = "<group>"; };
 		E90C00EB268C4B6500183DC2 /* DatePickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DatePickerViewController.xib; sourceTree = "<group>"; };
+		E9701B862697DFAA00E24CDD /* BackupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupViewController.swift; sourceTree = "<group>"; };
+		E9701B872697DFAA00E24CDD /* BackupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BackupViewController.xib; sourceTree = "<group>"; };
+		E9701B8A2697E3DC00E24CDD /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		E97A8252268412EC00114B78 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
 		E97A82542684361800114B78 /* GlobalUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalUtils.swift; sourceTree = "<group>"; };
 		E97A825826843A8400114B78 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +78,10 @@
 		E999C8582683209C0008ACEE /* TaskTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
 		E999C8592683209C0008ACEE /* TaskTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTableViewCell.xib; sourceTree = "<group>"; };
 		E999C85D268322C40008ACEE /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
+		E9D16CED26F19C4800EB4DB4 /* StatisticsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsViewController.swift; sourceTree = "<group>"; };
+		E9D16CEE26F19C4800EB4DB4 /* StatisticsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StatisticsViewController.xib; sourceTree = "<group>"; };
+		E9D16CF526F19D2D00EB4DB4 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		E9D16CF626F19D2D00EB4DB4 /* AboutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +120,15 @@
 				E90C00EB268C4B6500183DC2 /* DatePickerViewController.xib */,
 			);
 			path = datepicker;
+			sourceTree = "<group>";
+		};
+		E9701B852697DF8C00E24CDD /* backup */ = {
+			isa = PBXGroup;
+			children = (
+				E9701B862697DFAA00E24CDD /* BackupViewController.swift */,
+				E9701B872697DFAA00E24CDD /* BackupViewController.xib */,
+			);
+			path = backup;
 			sourceTree = "<group>";
 		};
 		E97A825726843A6F00114B78 /* main */ = {
@@ -168,6 +191,9 @@
 		E999C848268313C70008ACEE /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				E9D16CEC26F19C2C00EB4DB4 /* about */,
+				E9D16CEB26F19C1F00EB4DB4 /* statistics */,
+				E9701B852697DF8C00E24CDD /* backup */,
 				E97A825726843A6F00114B78 /* main */,
 				E999C84D268315B00008ACEE /* detail */,
 				E999C84C2683159F0008ACEE /* tasklist */,
@@ -181,6 +207,7 @@
 			children = (
 				E999C85C268322B90008ACEE /* extensions */,
 				E97A82542684361800114B78 /* GlobalUtils.swift */,
+				E9701B8A2697E3DC00E24CDD /* LoadingView.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -229,6 +256,24 @@
 				E97A826A268469DD00114B78 /* Sequence+.swift */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		E9D16CEB26F19C1F00EB4DB4 /* statistics */ = {
+			isa = PBXGroup;
+			children = (
+				E9D16CED26F19C4800EB4DB4 /* StatisticsViewController.swift */,
+				E9D16CEE26F19C4800EB4DB4 /* StatisticsViewController.xib */,
+			);
+			path = statistics;
+			sourceTree = "<group>";
+		};
+		E9D16CEC26F19C2C00EB4DB4 /* about */ = {
+			isa = PBXGroup;
+			children = (
+				E9D16CF526F19D2D00EB4DB4 /* AboutViewController.swift */,
+				E9D16CF626F19D2D00EB4DB4 /* AboutViewController.xib */,
+			);
+			path = about;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,12 +339,15 @@
 				E999C8402683139F0008ACEE /* LaunchScreen.storyboard in Resources */,
 				E97A825B26843A8400114B78 /* MainViewController.xib in Resources */,
 				E999C83D2683139F0008ACEE /* Assets.xcassets in Resources */,
+				E9D16CF026F19C4800EB4DB4 /* StatisticsViewController.xib in Resources */,
 				E97A825F26843BA700114B78 /* appicon2.png in Resources */,
 				E90C00ED268C4B6500183DC2 /* DatePickerViewController.xib in Resources */,
 				E999C8512683160C0008ACEE /* TodayViewController.xib in Resources */,
+				E9D16CF826F19D2D00EB4DB4 /* AboutViewController.xib in Resources */,
 				E999C85726831DA90008ACEE /* DetailViewController.xib in Resources */,
 				E999C85B2683209C0008ACEE /* TaskTableViewCell.xib in Resources */,
 				E97A825D26843B3500114B78 /* appicon.png in Resources */,
+				E9701B892697DFAA00E24CDD /* BackupViewController.xib in Resources */,
 				E97A8269268441B900114B78 /* TaskListViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -357,15 +405,19 @@
 				E97A8268268441B900114B78 /* TaskListViewController.swift in Sources */,
 				E97A825A26843A8400114B78 /* MainViewController.swift in Sources */,
 				E97A826426843EC400114B78 /* MenuTableViewCell.swift in Sources */,
+				E9701B8B2697E3DC00E24CDD /* LoadingView.swift in Sources */,
 				E97A826B268469DD00114B78 /* Sequence+.swift in Sources */,
 				E999C83B2683139D0008ACEE /* Daily_Tasks.xcdatamodeld in Sources */,
 				E999C8352683139D0008ACEE /* ViewController.swift in Sources */,
 				E999C8312683139D0008ACEE /* AppDelegate.swift in Sources */,
+				E9D16CF726F19D2D00EB4DB4 /* AboutViewController.swift in Sources */,
 				E97A8253268412EC00114B78 /* DBHelper.swift in Sources */,
 				E999C85E268322C40008ACEE /* View+.swift in Sources */,
+				E9701B882697DFAA00E24CDD /* BackupViewController.swift in Sources */,
 				E97A82552684361800114B78 /* GlobalUtils.swift in Sources */,
 				E90C00EC268C4B6500183DC2 /* DatePickerViewController.swift in Sources */,
 				E999C85626831DA90008ACEE /* DetailViewController.swift in Sources */,
+				E9D16CEF26F19C4800EB4DB4 /* StatisticsViewController.swift in Sources */,
 				E999C8332683139D0008ACEE /* SceneDelegate.swift in Sources */,
 				E999C8502683160C0008ACEE /* TodayViewController.swift in Sources */,
 			);
@@ -508,12 +560,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 3267Z52VP5;
 				INFOPLIST_FILE = "Daily Tasks/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.viettel.test.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -528,12 +582,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 3267Z52VP5;
 				INFOPLIST_FILE = "Daily Tasks/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = vn.viettel.test.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
